@@ -18,8 +18,12 @@ public class ProfileController {
 
     @GetMapping
     public String getProfile(
-            @ModelAttribute @AuthenticationPrincipal User user
+            @AuthenticationPrincipal User user,
+            Model model
+
     ){
+        model.addAttribute("username",user.getUsername());
+        model.addAttribute("password",user.getPassword());
         return "profile";
     }
 
