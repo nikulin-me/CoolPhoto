@@ -3,15 +3,26 @@ package nikulin.app.service;
 import javassist.NotFoundException;
 import nikulin.app.model.User;
 import nikulin.app.repo.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService implements UserDetailsService {
 
     private UserRepo userRepo;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public UserService(@Qualifier("userRepo") UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
 
 
     @Override
@@ -21,5 +32,27 @@ public class UserService implements UserDetailsService {
             throw  new UsernameNotFoundException("User not found!");
         }
         return user;
+    }
+
+    public boolean addUser(User user) {
+        User userFromDB = userRepo.findByUsername(user.getUsername());
+        if (userFromDB!=null){
+            return false;
+        }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepo.save(user);
+        return true;
+    }
+
+    public void update(User user, String username, String password) {
+        String usernameFromDB = user.getUsername();
+        String passwordFromDB=user.getPassword();
+        if (!usernameFromDB.equals(username)){
+            user.setUsername(username);
+        }
+        if (!passwordFromDB.equals(password)){
+            user.setPassword(passwordEncoder.encode(password));
+        }
+        userRepo.save(user);
     }
 }
