@@ -17,14 +17,34 @@
         </div>
         <div>
             <label>Password:</label>
-            <div class="col-sm-6">
+            <div>
                 <label>
                     <input type="password" name="password"
                     placeholder="Password"/>
                 </label>
-
             </div>
+            <#if passwordError??>
+                <div style="color: crimson">
+                    ${passwordError}
+                </div>
+            </#if>
         </div>
+        <#if isRegisterForm>
+        <div>
+            <label>Retype password:</label>
+            <div>
+                <label>
+                    <input type="password" name="passwordConfirm"
+                           placeholder="Retype Password"/>
+                </label>
+            </div>
+            <#if passwordConfirmError??>
+                <div style="color: crimson">
+                    ${passwordConfirmError}
+                </div>
+            </#if>
+        </div>
+        </#if>
         <input type="hidden" name="_csrf" value="${_csrf.token}" />
         <button  type="submit"><#if isRegisterForm>Create<#else>Sign In</#if></button>
     </form>
