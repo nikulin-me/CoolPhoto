@@ -27,5 +27,11 @@
          <button type="submit">Save change</button>
      </form>
     <br/>
+    <form method="post" action="/profile/delete">
+        <input type="submit" value="Delete">
+        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+    </form>
+
+
     <a href="/hi">Back</a>
 </@c.page>

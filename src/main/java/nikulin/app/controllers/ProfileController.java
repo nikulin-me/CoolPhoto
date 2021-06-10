@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/profile")
@@ -38,11 +40,19 @@ public class ProfileController {
             Model model
     ){
         model.addAttribute("username",username);
-        if (userRepo.findByUsername(username)!=null){
+        if (user.getUsername().equals(username)){
+            userService.update(user,username,password);
+        }
+        else if (userRepo.findByUsername(username)!=null){
             model.addAttribute("usernameError","User with this username exists");
             return "profile";
         }
         userService.update(user,username,password);
         return "redirect:/profile";
+    }
+    @PostMapping("/delete")
+    public String delUser(@AuthenticationPrincipal User user){
+        userService.delete(user);
+        return "redirect:/login";
     }
 }

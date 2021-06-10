@@ -55,4 +55,8 @@ public class UserService implements UserDetailsService {
         }
         userRepo.save(user);
     }
+
+    public void delete(User user) {
+        userRepo.delete(user);
+    }
 }

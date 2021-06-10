@@ -1,5 +1,6 @@
 <#macro login path isRegisterForm>
     <form action="${path}" method="post">
+
         <div>
             <label>User Name :</label>
             <div>

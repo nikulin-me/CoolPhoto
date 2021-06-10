@@ -6,10 +6,12 @@
         <title>CoolPhoto</title>
     </head>
     <body>
+    <h3>
+        <a href="/">CoolPhoto</a>
+    </h3>
     <div>
         <#nested>
     </div>
-
     </body>
     </html>
 </#macro>
