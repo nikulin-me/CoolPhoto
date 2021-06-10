@@ -21,8 +21,6 @@ public class RegistrationController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserRepo userRepo;
 
     @GetMapping
     public String getRegPage(){
@@ -30,11 +28,15 @@ public class RegistrationController {
     }
     @PostMapping
     public String addNewUser(
-
             @Valid User user,
-            BindingResult bindingResult
+            BindingResult bindingResult,
+            Model model
     ){
         if (bindingResult.hasErrors()){
+            return "registration";
+        }
+        if(!userService.addUser(user)){
+            model.addAttribute("usernameError","User with this name is already exists!");
             return "registration";
         }
         userService.addUser(user);

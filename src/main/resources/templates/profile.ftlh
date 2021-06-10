@@ -8,6 +8,11 @@
                  <label>
                      <input type="text" name="username" placeholder="Username" />
                  </label>
+                 <#if usernameError??>
+                     <div style="color: crimson">
+                         ${usernameError}
+                     </div>
+                 </#if>
              </div>
          </div>
          <div>
@@ -21,4 +26,6 @@
          <input type="hidden" name="_csrf" value="${_csrf.token}" />
          <button type="submit">Save change</button>
      </form>
+    <br/>
+    <a href="/hi">Back</a>
 </@c.page>

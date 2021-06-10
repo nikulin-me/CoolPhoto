@@ -9,6 +9,7 @@ known=Session.SPRING_SECURITY_CONTEXT??
     >
         <#else>
         <#assign
+        user="null"
         username = "unknown"
         isAdmin = false
         isRegistrationForm=true

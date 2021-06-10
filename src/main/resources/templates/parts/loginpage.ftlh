@@ -8,6 +8,11 @@
                            placeholder="User name" />
                 </label>
             </div>
+            <#if usernameError??>
+                <div style="color: crimson">
+                    ${usernameError}
+                </div>
+            </#if>
         </div>
         <div>
             <label>Password:</label>
