@@ -18,6 +18,10 @@ public class Photo {
     @JoinColumn(name = "user_id")
     private User author;
 
+    public String message;
+
     private String filename;
+
+    private String tag;
 
 }

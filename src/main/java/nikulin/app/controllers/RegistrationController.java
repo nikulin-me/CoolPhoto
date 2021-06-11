@@ -14,17 +14,17 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/registration")
 public class RegistrationController {
     @Autowired
     private UserService userService;
 
 
-    @GetMapping
+    @GetMapping("/registration")
     public String getRegPage(){
         return "registration";
     }
-    @PostMapping
+
+    @PostMapping("/registration")
     public String addNewUser(
             @RequestParam(value = "passwordConfirm",required =  false) String passwordConfirm,
             @Valid User user,

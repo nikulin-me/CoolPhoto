@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/profile")
@@ -29,7 +26,7 @@ public class ProfileController {
     ){
         model.addAttribute("username",user.getUsername());
         model.addAttribute("password",user.getPassword());
-        return "profile";
+        return "my_profile";
     }
 
     @PostMapping
@@ -45,14 +42,25 @@ public class ProfileController {
         }
         else if (userRepo.findByUsername(username)!=null){
             model.addAttribute("usernameError","User with this username exists");
-            return "profile";
+            return "my_profile";
         }
         userService.update(user,username,password);
-        return "redirect:/profile";
+        return "redirect:/my_profile";
     }
     @PostMapping("/delete")
     public String delUser(@AuthenticationPrincipal User user){
         userService.delete(user);
         return "redirect:/login";
+    }
+
+    @GetMapping("/{username}")
+    public String getUserProfile(
+            @PathVariable String username,
+            Model model
+    ){
+        User userFindThis = userRepo.findByUsername(username);
+        model.addAttribute("photos",userFindThis.getPhotos());
+
+        return "user_profile";
     }
 }

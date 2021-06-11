@@ -3,4 +3,6 @@
 <@c.page>
     <div>Sign in</div>
     <@l.login "/login" false/>
+    <a>Does not in system?</a>
+    <a href="/registration">Sign up!</a>
 </@c.page>
