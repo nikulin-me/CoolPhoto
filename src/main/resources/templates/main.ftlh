@@ -12,5 +12,13 @@
                <@l.logout>
                     <a href="/logout">Log out!</a>
                </@l.logout>
+
+               <br/>
+               <#if isAdmin>
+                    <a href="/users">Snow users</a>
+               </#if>
+
+
+
      </#if>
 </@c.page>

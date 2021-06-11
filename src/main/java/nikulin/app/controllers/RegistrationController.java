@@ -47,6 +47,6 @@ public class RegistrationController {
             return "registration";
         }
         userService.addUser(user);
-        return "redirect:/hi";
+        return "redirect:/";
     }
 }

@@ -28,16 +28,22 @@ public class  User implements UserDetails {
     @OneToMany(mappedBy = "author",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<Photo> photos;
 
-    public User(Long id, String username, String password, Set<Photo> photos) {
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
+
+    public User(Long id, @NotEmpty(message = "Empty username") String username, @NotEmpty(message = "Empty password") String password, Set<Photo> photos, Set<Role> roles) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.photos = photos;
+        this.roles = roles;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return getRoles();
     }
 
     @Override
@@ -59,4 +65,15 @@ public class  User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public  boolean isReallyAdmin(){
+        for (Role role:
+             this.roles) {
+            if (role.getAuthority().equals("ADMIN")){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
