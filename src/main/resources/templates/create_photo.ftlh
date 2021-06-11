@@ -1,10 +1,6 @@
 <#import "parts/common.ftlh"as c>
 <@c.page>
     <form method="post" enctype="multipart/form-data">
-        Message:
-        <label>
-            <input name="message" placeholder="Message" />
-        </label>
         Photo:
         <label>
             <input name="file" type="file">
@@ -13,6 +9,15 @@
                     ${photoError}
                 </div>
             </#if>
+        </label>
+        <br/>
+        Message:
+        <label>
+            <input name="message" placeholder="Message" />
+        </label>
+        Tags:
+        <label>
+            <input name="tag" placeholder="Tags">
         </label>
 
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>

@@ -59,8 +59,15 @@ public class ProfileController {
             Model model
     ){
         User userFindThis = userRepo.findByUsername(username);
+        if (userFindThis.getPhotos().isEmpty()){
+            model.addAttribute("username",username);
+            model.addAttribute("error","Тут пока ничего нет");
+            return "user_profile";
+        }
+        model.addAttribute("username",username);
         model.addAttribute("photos",userFindThis.getPhotos());
 
         return "user_profile";
     }
+
 }

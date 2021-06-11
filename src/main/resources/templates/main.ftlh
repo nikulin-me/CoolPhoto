@@ -8,9 +8,13 @@
         <br/>
         <a href="/login">Already exists?Sign in!</a>
     <#else>
-        <form method="post" action="/profile/{username}">
-            <input type="submit" value="Find creator">
-            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+        <form action="/profile/{username}">
+            <label>
+                <input name="username" placeholder="Username">
+            </label>
+            <label>
+                <input type="submit" value="Find creator">
+            </label>
         </form>
 
         <a href="/profile">Change me</a>
@@ -29,7 +33,7 @@
             <b>${photo.author}</b>
             <span>${photo.message}</span>
             <div>
-                ${photo.filename}
+                <img src="/img/${photo.filename}">
             </div>
             <br/>
             <i>${photo.tag}</i>
