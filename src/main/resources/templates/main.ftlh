@@ -8,7 +8,7 @@
         <br/>
         <a href="/login">Already exists?Sign in!</a>
     <#else>
-        <form action="/user">
+        <form action="/profile/{username}">
             <label>
                 <input name="username" placeholder="Username">
             </label>

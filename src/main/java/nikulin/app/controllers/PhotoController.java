@@ -29,9 +29,6 @@ public class PhotoController {
     @Autowired
     private PhotoRepo photoRepo;
 
-    @Autowired
-    private PhotoService photoService;
-
     @GetMapping("/create_photo")
     public String getCreatePhoto(){
         return "create_photo";
@@ -49,14 +46,13 @@ public class PhotoController {
             return "create_photo";
         }
         else{
-            photoService.uploadFile(file);
-            /*File uploadDir = new File(uploadPath);
+            File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()){
                 uploadDir.mkdir();
             }
             String uuidFile = UUID.randomUUID().toString();
             String resultFilename = uuidFile + "." + file.getOriginalFilename();
-            file.transferTo(new File(resultFilename));*/
+            file.transferTo(new File(resultFilename));
         }
         photo.setAuthor(user);
         photoRepo.save(photo);

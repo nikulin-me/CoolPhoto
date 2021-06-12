@@ -33,5 +33,5 @@
     </form>
 
 
-    <a href="/">Back</a>
+    <a href="/hi">Back</a>
 </@c.page>
