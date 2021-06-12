@@ -20,8 +20,18 @@ public class Photo {
 
     public String message;
 
-    private String filename;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "name")
+    private FileDb file;
 
     private String tag;
 
+
+    public Photo(Long id, User author, String message, FileDb file, String tag) {
+        this.id = id;
+        this.author = author;
+        this.message = message;
+        this.file = file;
+        this.tag = tag;
+    }
 }

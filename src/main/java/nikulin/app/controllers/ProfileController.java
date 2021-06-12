@@ -63,7 +63,6 @@ public class ProfileController {
             model.addAttribute("errorUser","User not found!");
             return "user_profile";
         }
-        assert userFindThis != null;
         if (userFindThis.getPhotos().isEmpty()){
             model.addAttribute("username",username);
             model.addAttribute("error","Тут пока ничего нет");
