@@ -18,10 +18,21 @@ public class Photo {
     @JoinColumn(name = "user_id")
     private User author;
 
-    public String message;
+    private String message;
 
     private String filename;
 
     private String tag;
+
+    @Lob
+    private byte[] data;
+
+    public Photo(User author, String message, String filename, String tag, byte[] data) {
+        this.author = author;
+        this.message = message;
+        this.filename = filename;
+        this.tag = tag;
+        this.data = data;
+    }
 
 }

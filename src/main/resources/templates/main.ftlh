@@ -30,7 +30,7 @@
         <a href="/create_photo">Create photo!</a>
 
         <#list photos as photo>
-            <b>${photo.author}</b>
+            <b>${photo.author.username}</b>
             <span>${photo.message}</span>
             <div>
                 <img src="/img/${photo.filename}">
