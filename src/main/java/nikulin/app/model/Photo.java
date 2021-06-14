@@ -24,15 +24,23 @@ public class Photo {
 
     private String tag;
 
+    private String type;
+
     @Lob
     private byte[] data;
 
-    public Photo(User author, String message, String filename, String tag, byte[] data) {
+    public Photo(User author, String message, String filename, String tag, String type, byte[] data) {
         this.author = author;
         this.message = message;
         this.filename = filename;
         this.tag = tag;
+        this.type = type;
         this.data = data;
     }
 
+    public Photo(String message, String tag, User user) {
+        this.message=message;
+        this.tag=tag;
+        this.author=user;
+    }
 }

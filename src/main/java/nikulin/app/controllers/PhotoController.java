@@ -7,16 +7,24 @@ import nikulin.app.repo.PhotoRepo;
 import nikulin.app.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
 import java.io.IOException;
+import java.util.Map;
+import java.util.UUID;
 
 @Controller
 public class PhotoController {
@@ -35,7 +43,7 @@ public class PhotoController {
         return "create_photo";
     }
 
-    @PostMapping("/create_photo")
+    @PostMapping("/create_photo11")
     public String createPhoto(
             @RequestParam("file") MultipartFile file,
             @Valid Photo photo,
@@ -51,4 +59,46 @@ public class PhotoController {
         }
         return "redirect:/";
     }
+
+    @PostMapping("/create_photo")
+    public String add(
+            @AuthenticationPrincipal User user,
+            @RequestParam String message,
+            @RequestParam String tag, Map<String, Object> model,
+            @RequestParam("file") MultipartFile file
+    ) throws IOException {
+        Photo photo = new Photo(message, tag, user);
+
+        if (file != null && !file.getOriginalFilename().isEmpty()) {
+            File uploadDir = new File(uploadPath);
+
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+
+            String uuidFile = UUID.randomUUID().toString();
+            String resultFilename = uuidFile + "." + file.getOriginalFilename();
+
+            file.transferTo(new File(uploadPath + "/" + resultFilename));
+
+            photo.setFilename(resultFilename);
+        }
+
+        photoRepo.save(photo);
+
+        Iterable<Photo> photos = photoRepo.findAll();
+
+        model.put("photos", photos);
+
+        return "main";
+
+    }
+    /*@GetMapping("/download_photo/{id}")
+    public ResponseEntity<ByteArrayResource> download(@PathVariable Long id){
+        Photo photo = photoService.getFile(id).get();
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(photo.getType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment:filename=\""+photo.getFilename()+"\"")
+                .body(new ByteArrayResource(photo.getData()));
+    }*/
 }

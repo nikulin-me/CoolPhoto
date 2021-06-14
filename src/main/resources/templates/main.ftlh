@@ -29,11 +29,14 @@
         <br/>
         <a href="/create_photo">Create photo!</a>
 
+        <br/>
         <#list photos as photo>
             <b>${photo.author.username}</b>
             <span>${photo.message}</span>
             <div>
-                <img src="/img/${photo.filename}">
+                <#if photo.filename??>
+                    <img src="/img/${photo.filename}">
+                </#if>
             </div>
             <br/>
             <i>${photo.tag}</i>

@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PhotoService {
@@ -36,10 +37,13 @@ public class PhotoService {
 
     public Photo uploadFile(MultipartFile file, User user, String message,String tag) throws IOException {
         String filename = file.getOriginalFilename();
-        Photo photo = new Photo(user, message, filename, tag, file.getBytes());
+        Photo photo = new Photo(user, message, filename, tag,file.getContentType(),file.getBytes());
         return photoRepo.save(photo);
     }
     public List<Photo> getFiles(){
         return photoRepo.findAll();
+    }
+    public Optional<Photo> getFile(Long id){
+        return Optional.empty();
     }
 }
