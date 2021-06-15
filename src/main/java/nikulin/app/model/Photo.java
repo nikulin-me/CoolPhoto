@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -20,6 +22,7 @@ public class Photo {
 
     private String message;
 
+    @NotNull(message = "Photo is empty!")
     private String filename;
 
     private String tag;

@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+import java.util.Properties;
+
 @Configuration
 public class MailConfig {
     @Value("${spring.mail.host}")
@@ -25,10 +27,24 @@ public class MailConfig {
 
     @Value("${mail.debug}")
     private String debug;
+    @Value("${spring.mail.properties.mail.smtp.auth}")
+    private String auth;
     @Bean
     public JavaMailSender getMailSender(){
-        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 
-        return javaMailSender;
+        mailSender.setHost(host);
+        mailSender.setPort(port);
+        mailSender.setUsername(username);
+        mailSender.setPassword(password);
+
+        Properties properties = mailSender.getJavaMailProperties();
+
+        properties.setProperty("mail.debug", debug); //когда что то пошло не так, можноо посмотреть об этом в логах
+        properties.setProperty("mail.smtp.auth", auth);
+        properties.setProperty("mail.transport.protocol", "smtp");
+        properties.setProperty("mail.smtp.starttls.enable", "true");
+
+        return mailSender;
     }
 }

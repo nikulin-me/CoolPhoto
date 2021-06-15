@@ -6,6 +6,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
 import java.util.Set;
@@ -19,10 +21,10 @@ public class  User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "Empty username")
+    @NotBlank(message = "Empty username")
     private String username;
 
-    @NotEmpty(message = "Empty password")
+    @NotBlank(message = "Empty password")
     private String password;
 
     @OneToMany(mappedBy = "author",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
@@ -33,6 +35,8 @@ public class  User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
+    @Email
+    @NotBlank(message = "Email must be!")
     private String email;
     private String activationCode;
 

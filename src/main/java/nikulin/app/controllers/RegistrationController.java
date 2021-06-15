@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -32,6 +33,10 @@ public class RegistrationController {
             BindingResult bindingResult,
             Model model
     ){
+        if (user.getUsername().isEmpty()){
+            model.addAttribute("usernameError","Username must be");
+            return "registration";
+        }
         if (!StringUtils.hasLength(passwordConfirm)){
             model.addAttribute("passwordConfirmError","Password confirm is empty!");
             return "registration";
@@ -49,5 +54,19 @@ public class RegistrationController {
         }
         userService.addUser(user);
         return "redirect:/";
+    }
+    @GetMapping("/activate/{code}")
+    public String activate(
+            Model model,
+            @PathVariable String code
+    ){
+        boolean isActivated=userService.activateUser(code);
+        if (isActivated){
+            model.addAttribute("message","User is activated");
+        }
+        else{
+            model.addAttribute("message","Activation code is not found");
+        }
+        return "loginpage";
     }
 }
