@@ -33,6 +33,9 @@ public class  User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
+    private String email;
+    private String activationCode;
+
     public User(Long id, @NotEmpty(message = "Empty username") String username, @NotEmpty(message = "Empty password") String password, Set<Photo> photos, Set<Role> roles) {
         this.id = id;
         this.username = username;

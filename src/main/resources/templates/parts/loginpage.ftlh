@@ -43,6 +43,20 @@
                     ${passwordConfirmError}
                 </div>
             </#if>
+            <div>
+                <label>Email:</label>
+                <div>
+                    <label>
+                        <input type="email" name="email"
+                               placeholder="some@mail.com"/>
+                    </label>
+                </div>
+                <#if emailError??>
+                    <div style="color: crimson">
+                        ${emailError}
+                    </div>
+                </#if>
+            </div>
         </div>
         </#if>
         <input type="hidden" name="_csrf" value="${_csrf.token}" />

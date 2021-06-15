@@ -11,21 +11,23 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Collections;
+import java.util.UUID;
 
 @Service
 public class UserService implements UserDetailsService {
 
+    @Autowired
     private UserRepo userRepo;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(@Qualifier("userRepo") UserRepo userRepo) {
-        this.userRepo = userRepo;
-    }
+    private MailSender mailSender;
+
 
 
     @Override
@@ -44,7 +46,17 @@ public class UserService implements UserDetailsService {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Collections.singleton(Role.USER));
+        user.setActivationCode(UUID.randomUUID().toString());
         userRepo.save(user);
+        if (!StringUtils.hasLength(user.getEmail())){
+            String message=String.format(
+                    "Hi, %s \n"+
+                            "Welcome to CoolPhoto. Please, activate in this link:" +
+                            "http://localhost:8080/activate/%s",
+                    user.getUsername(),user.getActivationCode()
+            );
+            mailSender.send(user.getEmail(),"Activation Code",message);
+        }
         return true;
     }
 
