@@ -63,11 +63,11 @@ public class PhotoController {
     @PostMapping("/create_photo")
     public String add(
             @AuthenticationPrincipal User user,
-            @RequestParam String message,
-            @RequestParam String tag, Map<String, Object> model,
+            @Valid Photo photo1,
+            Map<String, Object> model,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
-        Photo photo = new Photo(message, tag, user);
+        Photo photo = new Photo(photo1.getMessage(), photo1.getTag(), user);
 
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
@@ -93,12 +93,4 @@ public class PhotoController {
         return "main";
 
     }
-    /*@GetMapping("/download_photo/{id}")
-    public ResponseEntity<ByteArrayResource> download(@PathVariable Long id){
-        Photo photo = photoService.getFile(id).get();
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(photo.getType()))
-                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment:filename=\""+photo.getFilename()+"\"")
-                .body(new ByteArrayResource(photo.getData()));
-    }*/
 }

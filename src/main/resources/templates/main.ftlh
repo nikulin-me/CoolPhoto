@@ -31,15 +31,20 @@
 
         <br/>
         <#list photos as photo>
-            <b>${photo.author.username}</b>
-            <span>${photo.message}</span>
+            <a href="/users/${photo.author.username}">
+                <b>
+                    ${photo.author.username}
+                </b>
+            </a>
             <div>
                 <#if photo.filename??>
                     <img src="/img/${photo.filename}">
                 </#if>
             </div>
             <br/>
-            <i>${photo.tag}</i>
+            <span>${photo.message}</span>
+            <br/>
+            <i>#${photo.tag}</i>
         </#list>
     </#if>
 </@c.page>
