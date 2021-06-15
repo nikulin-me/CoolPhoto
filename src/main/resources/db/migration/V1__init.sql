@@ -21,10 +21,10 @@ create table usr
     username varchar(255),
     email varchar(255),
     activation_code varchar(255),
+    active   boolean not null,
     primary key (id)
 );
 alter table if exists photo
     add constraint photo_user_from_key foreign key (user_id) references usr;
 alter table if exists user_role
     add constraint user_role_user_fk foreign key (user_id) references usr;
-insert into usr (id,password, username) values (1,1, 'Admin');

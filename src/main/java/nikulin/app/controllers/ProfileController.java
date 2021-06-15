@@ -45,7 +45,7 @@ public class ProfileController {
             return "my_profile";
         }
         userService.update(user,username,password);
-        return "redirect:/my_profile";
+        return "redirect:/profile";
     }
     @PostMapping("/delete")
     public String delUser(@AuthenticationPrincipal User user){

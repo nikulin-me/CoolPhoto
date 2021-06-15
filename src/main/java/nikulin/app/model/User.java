@@ -27,6 +27,8 @@ public class  User implements UserDetails {
     @NotBlank(message = "Empty password")
     private String password;
 
+    private boolean active;
+
     @OneToMany(mappedBy = "author",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<Photo> photos;
 

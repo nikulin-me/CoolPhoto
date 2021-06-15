@@ -44,6 +44,7 @@ public class UserService implements UserDetailsService {
         if (userFromDB!=null){
             return false;
         }
+        user.setActive(true);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Collections.singleton(Role.USER));
         user.setActivationCode(UUID.randomUUID().toString());

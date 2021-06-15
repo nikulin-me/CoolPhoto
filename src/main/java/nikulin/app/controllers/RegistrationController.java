@@ -53,7 +53,7 @@ public class RegistrationController {
             return "registration";
         }
         userService.addUser(user);
-        return "redirect:/";
+        return "redirect:/login";
     }
     @GetMapping("/activate/{code}")
     public String activate(
