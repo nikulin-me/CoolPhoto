@@ -31,10 +31,15 @@
 
         <br/>
         <#list photos as photo>
-            <a href="/users/${photo.author.username}">
+            <br/>
+            <br/>
+            <a href="/profile/${photo.author.username}">
                 <b>
                     ${photo.author.username}
                 </b>
+                <#if photo.author.username==username>
+                    <a href="/update_photo/${photo.id}">Edit</a>
+                </#if>
             </a>
             <div>
                 <#if photo.filename??>
