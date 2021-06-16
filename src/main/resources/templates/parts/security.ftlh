@@ -7,12 +7,14 @@ known=Session.SPRING_SECURITY_CONTEXT??
     username = user.getUsername()
     isAdmin=user.isReallyAdmin()
     isRegistrationForm=false
+    isActive=user.isUserActive()
     >
-        <#else>
-        <#assign
-        user="null"
-        username = "unknown"
-        isAdmin = false
-        isRegistrationForm=true
-        >
+<#else>
+    <#assign
+    user="null"
+    username = "unknown"
+    isAdmin = false
+    isRegistrationForm=true
+    isActive=false
+    >
 </#if>

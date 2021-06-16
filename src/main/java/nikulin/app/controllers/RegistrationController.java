@@ -53,7 +53,7 @@ public class RegistrationController {
             return "registration";
         }
         userService.addUser(user);
-        return "redirect:/login";
+        return "check_email";
     }
     @GetMapping("/activate/{code}")
     public String activate(
@@ -63,10 +63,11 @@ public class RegistrationController {
         boolean isActivated=userService.activateUser(code);
         if (isActivated){
             model.addAttribute("message","User is activated");
+
         }
         else{
             model.addAttribute("message","Activation code is not found");
         }
-        return "loginpage";
+        return "login_page";
     }
 }

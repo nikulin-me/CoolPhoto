@@ -44,20 +44,16 @@ public class UserService implements UserDetailsService {
         if (userFromDB!=null){
             return false;
         }
-        user.setActive(true);
+
+        user.setActive(false);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Collections.singleton(Role.USER));
         user.setActivationCode(UUID.randomUUID().toString());
+
         userRepo.save(user);
-        if (!StringUtils.hasLength(user.getEmail())){
-            String message=String.format(
-                    "Hi, %s \n"+
-                            "Welcome to CoolPhoto. Please, activate in this link:" +
-                            "http://localhost:8080/activate/%s",
-                    user.getUsername(),user.getActivationCode()
-            );
-            mailSender.send(user.getEmail(),"Activation Code",message);
-        }
+
+        sendMessage(user);
+
         return true;
     }
 
@@ -73,17 +69,34 @@ public class UserService implements UserDetailsService {
         userRepo.save(user);
     }
 
+
+    private void sendMessage(User user) {
+        if (!StringUtils.isEmpty(user.getEmail())) {
+            String message = String.format(
+                    "Welcome to CoolPhoto, %s! \n" +
+                            "Please, visit next link: http://localhost:8080/activate/%s",
+                    user.getUsername(),
+                    user.getActivationCode()
+            );
+
+            mailSender.send(user.getEmail(), "Activation code", message);
+        }
+    }
     public void delete(User user) {
         userRepo.delete(user);
     }
 
     public boolean activateUser(String code) {
         User user = userRepo.findByActivationCode(code);
-        if (user!=null){
-            user.setActivationCode(null);
-            userRepo.save(user);
-            return true;
+
+        if (user == null) {
+            return false;
         }
-        return false;
+
+        user.setActivationCode(null);
+        user.setActive(true);
+        userRepo.save(user);
+
+        return true;
     }
 }
