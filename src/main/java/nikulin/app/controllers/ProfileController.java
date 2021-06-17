@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/user/profile")
+@RequestMapping("/user")
 public class ProfileController {
 
     @Autowired
@@ -19,7 +19,7 @@ public class ProfileController {
     @Autowired
     private UserRepo userRepo;
 
-    @GetMapping
+    @GetMapping("/profile")
     public String getProfile(
             @AuthenticationPrincipal User user,
             Model model
@@ -29,7 +29,7 @@ public class ProfileController {
         return "my_profile";
     }
 
-    @PostMapping
+    @PostMapping("/profile")
     public String updateProfile(
             @AuthenticationPrincipal User user,
             @RequestParam String username,
@@ -45,7 +45,7 @@ public class ProfileController {
             return "my_profile";
         }
         userService.update(user,username,password);
-        return "redirect:/profile";
+        return "redirect:/user/profile";
     }
     @PostMapping("/delete")
     public String delUser(@AuthenticationPrincipal User user){
@@ -53,15 +53,16 @@ public class ProfileController {
         return "redirect:/login";
     }
 
-    @GetMapping("/{username.id}")
+    @GetMapping
     public String getUserProfile(
-            @PathVariable String username,
+            @RequestParam String username,
             Model model
     ){
         User userFindThis = userRepo.findByUsername(username);
         if (userFindThis==null){
             model.addAttribute("error","Такого юзера нет");
         }
+        assert userFindThis != null;
         if (userFindThis.getPhotos().isEmpty()){
             model.addAttribute("username",username);
             model.addAttribute("error","Тут пока ничего нет");

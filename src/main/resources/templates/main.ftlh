@@ -4,11 +4,9 @@
 <@c.page>
 
     <#if isRegistrationForm || username=="unknown">
-        <a href="/registration">Please, sign up!</a>
-        <br/>
-        <a href="/login">Already exists?Sign in!</a>
+        <a href="/login">Please, sign in or sign up</a>
     <#else>
-        <form action="/user/profile/{username.id}">
+        <form action="/user">
             <label>
                 <input name="username" placeholder="Username">
             </label>
