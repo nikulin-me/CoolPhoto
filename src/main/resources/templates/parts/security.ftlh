@@ -8,6 +8,7 @@ known=Session.SPRING_SECURITY_CONTEXT??
     isAdmin=user.isReallyAdmin()
     isRegistrationForm=false
     isActive=user.isUserActive()
+    currentUserId=user.getId()
     >
 <#else>
     <#assign
@@ -16,5 +17,6 @@ known=Session.SPRING_SECURITY_CONTEXT??
     isAdmin = false
     isRegistrationForm=true
     isActive=false
+    currentUserId=-1
     >
 </#if>

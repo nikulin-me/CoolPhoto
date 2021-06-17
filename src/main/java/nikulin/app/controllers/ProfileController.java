@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/profile")
+@RequestMapping("/user/profile")
 public class ProfileController {
 
     @Autowired
@@ -53,7 +53,7 @@ public class ProfileController {
         return "redirect:/login";
     }
 
-    @GetMapping("/{username}")
+    @GetMapping("/{username.id}")
     public String getUserProfile(
             @PathVariable String username,
             Model model

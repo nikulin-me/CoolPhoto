@@ -6,14 +6,16 @@
     <div>
         <#if error??>
             ${error}
+        <#else>
+            <#list photos as photo>
+                <span>${photo.message}</span>
+                <div>
+                    <img src="/img/${photo.filename}">
+                </div>
+                <br/>
+                <i>${photo.tag}</i>
+            </#list>
         </#if>
-        <#list photos as photo>
-            <span>${photo.message}</span>
-            <div>
-                <img src="/img/${photo.filename}">
-            </div>
-            <br/>
-            <i>${photo.tag}</i>
-        </#list>
+
     </div>
 </@c.page>

@@ -69,7 +69,7 @@ public class PhotoController {
 
 
 
-    @GetMapping("/update_photo{photo.id}")
+    @GetMapping("/update_photo{photo}")
     public String getUpdatePhoto(
             @PathVariable Photo photo,
             Model model
@@ -80,7 +80,7 @@ public class PhotoController {
         return "update_photo";
     }
 
-    @PostMapping("/update_photo{photo.id}")
+    @PostMapping("/update_photo{photo}")
     public String updatePhoto(
             @PathVariable Photo photo,
             @Valid Photo newPhoto){
