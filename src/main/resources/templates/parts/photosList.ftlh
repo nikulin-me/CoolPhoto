@@ -8,7 +8,7 @@
                 border-bottom: 1px solid
             }
         </style>
-        <a href="/user?username=${user.id}">
+        <a href="/user?username=${photo.author.username}">
             <b>
                 ${photo.author.username}
             </b>

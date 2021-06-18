@@ -1,9 +1,11 @@
 package nikulin.app.controllers;
 
 
+import nikulin.app.model.CaptchaResponseDto;
 import nikulin.app.model.User;
 import nikulin.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -12,13 +14,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
+import java.util.Collections;
 
 @Controller
 public class RegistrationController {
+
+    private static String CAPTCHA_URL="https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s";
+    @Value("${recaptcha.secret}")
+    private String secret;
+
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
 
     @GetMapping("/registration")
@@ -31,8 +43,15 @@ public class RegistrationController {
             @RequestParam(value = "passwordConfirm",required =  false) String passwordConfirm,
             @Valid User user,
             BindingResult bindingResult,
+            @RequestParam("g-recaptcha-response") String captchaResponse,
             Model model
     ){
+        String url = String.format(CAPTCHA_URL, secret, captchaResponse);
+        CaptchaResponseDto response = restTemplate.postForObject(url, Collections.emptyList(), CaptchaResponseDto.class);
+        if (response == null) throw new AssertionError();
+        if (!response.isSuccess()){
+            model.addAttribute("captchaError","Fill captcha");
+        }
         if (user.getUsername().isEmpty()){
             model.addAttribute("usernameError","Username must be");
             return "registration";
