@@ -87,5 +87,6 @@ public class PhotoService {
         if (!photo.getTag().equals(tag)) {
             photo.setTag(tag);
         }
+        photoRepo.save(photo);
     }
 }

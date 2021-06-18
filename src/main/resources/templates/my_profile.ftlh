@@ -6,7 +6,7 @@
              <label >Username :</label>
              <div>
                  <label>
-                     <input type="text" name="username" placeholder="Username" />
+                     <input type="text" value="<#if user??>${user.username}</#if>" name="username" placeholder="Username" />
                  </label>
                  <#if usernameError??>
                      <div style="color: crimson">
@@ -19,7 +19,7 @@
              <label>Password:</label>
              <div>
                  <label>
-                     <input type="password" name="password" class="form-control" placeholder="Password" />
+                     <input type="password" value="<#if user??>${user.password}</#if>" name="password" class="form-control" placeholder="Password" />
                  </label>
              </div>
          </div>

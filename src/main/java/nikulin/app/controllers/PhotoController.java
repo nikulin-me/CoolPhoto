@@ -72,28 +72,24 @@ public class PhotoController {
 
     @GetMapping("/update_photo/{user}")
     public String getUpdatePhoto(
-            @PathVariable User user,
-            @RequestParam Photo photo,
+            @PathVariable Long user,
+            @RequestParam(required = false) Photo photo,
             Model model
     ){
-        model.addAttribute("message",photo.getMessage());
-        model.addAttribute("tag",photo.getTag());
-
+        model.addAttribute("photo",photo);
         return "update_photo";
     }
 
     @PostMapping("/update_photo/{user}")
     public String updatePhoto(
-            @PathVariable User user,
+            @PathVariable Long user,
             @RequestParam String message,
             @RequestParam String tag,
             @RequestParam Photo photo
             ){
 
-
         photoService.updatePhoto(photo,message,tag);
 
         return "redirect:/";
     }
-
 }

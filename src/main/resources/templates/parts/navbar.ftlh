@@ -25,6 +25,20 @@
                     <a class="nav-link" href="/login">Sign In</a>
                 </li>
             </#if>
+            <#if user??>
+                <li>
+                    <a class="nav-link" href="/user/profile">
+                        Profile
+                    </a>
+                </li>
+            </#if>
+            <#if user??>
+                <li>
+                    <a class="nav-link" href="/create_photo">
+                        Create photo
+                    </a>
+                </li>
+            </#if>
 
         </ul>
         <#if !isRegistrationForm>
