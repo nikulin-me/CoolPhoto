@@ -18,11 +18,15 @@
                 </label>
             </div>
 
+
             <input type="hidden" name="_csrf" value="${_csrf.token}" />
-            <input type="hidden" name="id" value="<#if photo??>${photo.id}</#if>" />
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
+        </form>
+        <form method="post" action="/update_photo/${photo.author.id}/delete/?photo=${photo.id}">
+            <input type="submit" value="Delete">
+            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         </form>
     </div>
 </@c.page>

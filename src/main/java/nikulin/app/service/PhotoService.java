@@ -89,4 +89,8 @@ public class PhotoService {
         }
         photoRepo.save(photo);
     }
+
+    public void deleteById(Long photo) {
+        photoRepo.deleteById(photo);
+    }
 }

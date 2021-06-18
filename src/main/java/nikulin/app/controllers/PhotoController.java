@@ -69,14 +69,13 @@ public class PhotoController {
     }
 
 
-
     @GetMapping("/update_photo/{user}")
     public String getUpdatePhoto(
             @PathVariable Long user,
             @RequestParam(required = false) Photo photo,
             Model model
-    ){
-        model.addAttribute("photo",photo);
+    ) {
+        model.addAttribute("photo", photo);
         return "update_photo";
     }
 
@@ -86,10 +85,20 @@ public class PhotoController {
             @RequestParam String message,
             @RequestParam String tag,
             @RequestParam Photo photo
-            ){
+    ) {
 
-        photoService.updatePhoto(photo,message,tag);
+        photoService.updatePhoto(photo, message, tag);
 
         return "redirect:/";
     }
+
+    @PostMapping("/update_photo/{user}/delete")
+    public String deletePhoto(
+            @PathVariable Long user,
+            @RequestParam Long photo
+    ) {
+        photoService.deleteById(photo);
+        return "redirect:/";
+    }
+
 }
