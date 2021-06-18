@@ -3,6 +3,11 @@
     <#list photos as photo>
         <br/>
         <br/>
+        <style>
+            .line {
+                border-bottom: 1px solid
+            }
+        </style>
         <a href="/user/${photo.author.id}">
             <b>
                 ${photo.author.username}
@@ -20,5 +25,6 @@
         <span>${photo.message}</span>
         <br/>
         <i>#${photo.tag}</i>
+        <div class="line"></div>
     </#list>
 </div>

@@ -60,23 +60,23 @@ public class ProfileController {
         return "redirect:/login";
     }
 
-    @GetMapping("/{user}")
+    @GetMapping
     public String getUserProfile(
-            @PathVariable User user,
+            @RequestParam String username,
             Model model
     ){
-        User userFindThis = userRepo.findByUsername(user.getUsername());
+        User userFindThis = userRepo.findByUsername(username);
         Set<Photo> photoOfUser = photoRepo.findByAuthor(userFindThis);
         if (userFindThis==null){
             model.addAttribute("error","Такого юзера нет");
         }
         assert userFindThis != null;
-        if (userFindThis.getPhotos().isEmpty()){
-            model.addAttribute("username",user.getUsername());
+        if (photoOfUser.isEmpty()){
+            model.addAttribute("username",username);
             model.addAttribute("error","Тут пока ничего нет");
             return "user_profile";
         }
-        model.addAttribute("username",user.getUsername());
+        model.addAttribute("username",username);
         model.addAttribute("photos",photoOfUser);
 
         return "user_profile";

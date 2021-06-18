@@ -3,22 +3,11 @@
 <#import "parts/common.ftlh" as c>
 <@c.page>
 
-    <#if isRegistrationForm || username=="unknown">
-        <a href="/login">Please, sign in or sign up</a>
+    <#if isRegistrationForm>
+        <#include "parts/loginpage.ftlh">
     <#else>
-        <form action="/user/${user.id}">
-            <label>
-                <input name="username" placeholder="Username">
-            </label>
-            <label>
-                <input type="submit" value="Find creator">
-            </label>
-        </form>
 
         <br/>
-        <#--<#if isAdmin>
-            <a href="/users">Snow users</a>
-        </#if>-->
         <br/>
         <a href="/create_photo">Create photo!</a>
 

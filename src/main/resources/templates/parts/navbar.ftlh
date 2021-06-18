@@ -30,11 +30,24 @@
                     <a class="nav-link" href="/login">Sign In</a>
                 </li>
             </#if>
-        </ul>
 
-        <div class="navbar-text mr-3">${username}</div>
-        <#if user??>
-            <@l.logout />
+        </ul>
+        <#if !isRegistrationForm>
+            <div class="navbar-taxt mr-5">
+                <form action="/user">
+                    <label>
+                        <input name="username" placeholder="Username">
+                    </label>
+                    <label>
+                        <input type="submit" value="Find creator">
+                    </label>
+                </form>
+            </div>
+
+            <div class="navbar-text mr-3">${username}</div>
+            <#if user??>
+                <@l.logout />
+            </#if>
         </#if>
 
     </div>
