@@ -80,13 +80,14 @@ public class PhotoService {
         }
     }
 
-    public void updatePhoto(Photo photo, String message, String tag) {
+    public void updatePhoto(Photo photo, String message, String tag, MultipartFile file) throws IOException {
         if (!photo.getMessage().equals(message)) {
             photo.setMessage(message);
         }
         if (!photo.getTag().equals(tag)) {
             photo.setTag(tag);
         }
+        createFile(photo,file);
         photoRepo.save(photo);
     }
 

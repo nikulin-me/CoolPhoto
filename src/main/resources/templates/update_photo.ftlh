@@ -17,12 +17,16 @@
                            value="<#if photo??>${photo.message}</#if>" name="tag" placeholder="Tag" />
                 </label>
             </div>
+            <label>
+                <input name="file" type="file">
+            </label>
 
 
             <input type="hidden" name="_csrf" value="${_csrf.token}" />
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
+
         </form>
         <form method="post" action="/update_photo/${photo.author.id}/delete/?photo=${photo.id}">
             <input type="submit" value="Delete">

@@ -84,10 +84,11 @@ public class PhotoController {
             @PathVariable Long user,
             @RequestParam String message,
             @RequestParam String tag,
-            @RequestParam Photo photo
-    ) {
+            @RequestParam Photo photo,
+            @RequestParam("file") MultipartFile file
+    ) throws IOException {
 
-        photoService.updatePhoto(photo, message, tag);
+        photoService.updatePhoto(photo, message , tag,file);
 
         return "redirect:/";
     }
