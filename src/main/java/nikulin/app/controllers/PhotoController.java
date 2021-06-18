@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 public class PhotoController {
@@ -69,10 +70,10 @@ public class PhotoController {
 
 
 
-    @GetMapping("/update_photo/{user}/{photo}")
+    @GetMapping("/update_photo/{user}")
     public String getUpdatePhoto(
             @PathVariable User user,
-            @PathVariable Photo photo,
+            @RequestParam Photo photo,
             Model model
     ){
         model.addAttribute("message",photo.getMessage());
@@ -81,12 +82,18 @@ public class PhotoController {
         return "update_photo";
     }
 
-    @PostMapping("/update_photo/{photo}")
+    @PostMapping("/update_photo/{user}")
     public String updatePhoto(
-            @PathVariable Photo photo,
-            @Valid Photo newPhoto){
-        photoService.updatePhoto(photo,newPhoto);
+            @PathVariable User user,
+            @RequestParam String message,
+            @RequestParam String tag,
+            @RequestParam Photo photo
+            ){
+
+
+        photoService.updatePhoto(photo,message,tag);
 
         return "redirect:/";
     }
+
 }

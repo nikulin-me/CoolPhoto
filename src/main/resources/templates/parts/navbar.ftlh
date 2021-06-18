@@ -15,17 +15,12 @@
                     <a class="nav-link" href="/users">User list</a>
                 </li>
             </#if>
-            <#if user??>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/profile">Profile</a>
-                </li>
-            </#if>
+
             <#if isRegistrationForm>
                 <li class="nav-item">
                     <a class="nav-link" href="/registration">Sign Up</a>
                 </li>
-            </#if>
-            <#if isRegistrationForm>
+
                 <li class="nav-item">
                     <a class="nav-link" href="/login">Sign In</a>
                 </li>

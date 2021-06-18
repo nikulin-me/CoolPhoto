@@ -54,14 +54,6 @@ public class PhotoService {
         return Optional.empty();
     }
 
-    public void updatePhoto(Photo photo, Photo photo1) {
-        if (!photo.getMessage().equals(photo1.getMessage())) {
-            photo.setMessage(photo1.getMessage());
-        }
-        if (!photo.getTag().equals(photo1.getTag())) {
-            photo.setTag(photo1.getTag());
-        }
-    }
 
     public void createFile(@Valid Photo photo1, @RequestParam("file") MultipartFile file) throws IOException {
         if (file != null && !file.getOriginalFilename().isEmpty()) {
@@ -82,9 +74,18 @@ public class PhotoService {
 
     public void deleteByAuthor(User user) {
         Set<Photo> photoByAuthor = photoRepo.findByAuthor(user);
-        for (Photo photo:
-             photoByAuthor) {
+        for (Photo photo :
+                photoByAuthor) {
             photoRepo.delete(photo);
+        }
+    }
+
+    public void updatePhoto(Photo photo, String message, String tag) {
+        if (!photo.getMessage().equals(message)) {
+            photo.setMessage(message);
+        }
+        if (!photo.getTag().equals(tag)) {
+            photo.setTag(tag);
         }
     }
 }

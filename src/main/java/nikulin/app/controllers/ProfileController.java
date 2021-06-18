@@ -70,7 +70,6 @@ public class ProfileController {
         if (userFindThis==null){
             model.addAttribute("error","Такого юзера нет");
         }
-        assert userFindThis != null;
         if (photoOfUser.isEmpty()){
             model.addAttribute("username",username);
             model.addAttribute("error","Тут пока ничего нет");

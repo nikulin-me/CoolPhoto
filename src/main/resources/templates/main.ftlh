@@ -3,13 +3,9 @@
 <#import "parts/common.ftlh" as c>
 <@c.page>
 
-    <#if isRegistrationForm>
-        <#include "parts/loginpage.ftlh">
+    <#if isRegistrationForm || username=="unknown">
+        <a href="/login">Please, sign in or sign up</a>
     <#else>
-
-        <br/>
-        <br/>
-        <a href="/create_photo">Create photo!</a>
 
         <br/>
         <#include "parts/photosList.ftlh">
