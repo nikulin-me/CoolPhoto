@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.Collections;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -102,5 +103,18 @@ public class UserService implements UserDetailsService {
         userRepo.save(user);
 
         return true;
+    }
+
+    public void subscribe(User user, String username) {
+        User userFromDb = userRepo.findByUsername(username);
+        userFromDb.getSubscribers().add(user);
+
+        userRepo.save(user);
+    }
+
+    public void unsubscribe(User user, String username) {
+        User userFromDb = userRepo.findByUsername(username);
+        userFromDb.getSubscribers().remove(user);
+        userRepo.save(user);
     }
 }

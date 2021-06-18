@@ -10,6 +10,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -41,6 +42,23 @@ public class  User implements UserDetails {
     @NotBlank(message = "Email must be!")
     private String email;
     private String activationCode;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_subscriptions",
+            joinColumns = { @JoinColumn(name = "channel_id")},
+            inverseJoinColumns = {@JoinColumn(name = "subscriber_id")}
+    )
+    private Set<User> subscribers=new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_subscriptions",
+            joinColumns = {@JoinColumn(name = "subscriber_id")},
+            inverseJoinColumns = { @JoinColumn(name = "channel_id")}
+    )
+    private Set<User> subscriptions=new HashSet<>();
+
 
     public User(Long id, @NotEmpty(message = "Empty username") String username, @NotEmpty(message = "Empty password") String password, Set<Photo> photos, Set<Role> roles) {
         this.id = id;

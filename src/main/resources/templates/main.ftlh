@@ -2,7 +2,9 @@
 <#import "parts/loginpage.ftlh" as l>
 <#import "parts/common.ftlh" as c>
 <@c.page>
-
+    <#if error??>
+        ${error}
+    </#if>
     <#if isRegistrationForm || username=="unknown">
         <a href="/login">Please, sign in or sign up</a>
     <#else>

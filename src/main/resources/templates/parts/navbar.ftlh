@@ -27,7 +27,7 @@
             </#if>
             <#if user??>
                 <li>
-                    <a class="nav-link" href="/user/profile">
+                    <a class="nav-link" href="/user?username=${username}">
                         Profile
                     </a>
                 </li>

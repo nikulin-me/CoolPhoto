@@ -62,6 +62,7 @@ public class ProfileController {
 
     @GetMapping
     public String getUserProfile(
+            @AuthenticationPrincipal User user,
             @RequestParam String username,
             Model model
     ){
@@ -69,15 +70,22 @@ public class ProfileController {
         Set<Photo> photoOfUser = photoRepo.findByAuthor(userFindThis);
         if (userFindThis==null){
             model.addAttribute("error","Такого юзера нет");
+            return "redirect:/";
         }
         if (photoOfUser.isEmpty()){
-            model.addAttribute("username",username);
             model.addAttribute("error","Тут пока ничего нет");
-            return "user_profile";
         }
-        model.addAttribute("username",username);
+        else{
+            model.addAttribute("photos",photoRepo);
+        }
+        model.addAttribute("userChannel",username);
         model.addAttribute("photos",photoOfUser);
+        model.addAttribute("subscribersCount",userFindThis.getSubscribers().size());
+        model.addAttribute("subscriptionsCount",userFindThis.getSubscriptions().size());
+        model.addAttribute("isSubscribe",userFindThis.getSubscribers().contains(user));
+
 
         return "user_profile";
     }
+
 }
