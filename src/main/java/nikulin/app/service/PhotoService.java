@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -76,6 +77,14 @@ public class PhotoService {
             file.transferTo(new File(uploadPath + "/" + resultFilename));
 
             photo1.setFilename(resultFilename);
+        }
+    }
+
+    public void deleteByAuthor(User user) {
+        Set<Photo> photoByAuthor = photoRepo.findByAuthor(user);
+        for (Photo photo:
+             photoByAuthor) {
+            photoRepo.delete(photo);
         }
     }
 }

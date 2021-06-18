@@ -57,16 +57,20 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
-    public void update(User user, String username, String password) {
+    public boolean update(User user, String username, String password) {
         String usernameFromDB = user.getUsername();
         String passwordFromDB=user.getPassword();
-        if (!usernameFromDB.equals(username)){
+        boolean isNameChanged = ((username != null && !username.equals(usernameFromDB)) || (usernameFromDB != null && !usernameFromDB.equals(username)));
+        boolean isPasswordChanged = (password != null && !password.equals(passwordFromDB)) || (passwordFromDB != null && !passwordFromDB.equals(password));
+        if (isNameChanged && isPasswordChanged){
             user.setUsername(username);
-        }
-        if (!passwordFromDB.equals(password)){
             user.setPassword(passwordEncoder.encode(password));
+            userRepo.save(user);
+            return true;
         }
-        userRepo.save(user);
+        else{
+            return false;
+        }
     }
 
 
