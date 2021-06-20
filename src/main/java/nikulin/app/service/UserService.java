@@ -1,11 +1,9 @@
 package nikulin.app.service;
 
-import javassist.NotFoundException;
 import nikulin.app.model.Role;
 import nikulin.app.model.User;
 import nikulin.app.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.Collections;
-import java.util.Set;
 import java.util.UUID;
 
 @Service
