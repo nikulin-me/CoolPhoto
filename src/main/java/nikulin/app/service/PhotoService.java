@@ -42,7 +42,7 @@ public class PhotoService {
 
     public Photo uploadFile(MultipartFile file, User user, String message, String tag) throws IOException {
         String filename = file.getOriginalFilename();
-        Photo photo = new Photo(user, message, filename, tag, file.getContentType(), file.getBytes());
+        Photo photo = new Photo(user, message, filename, tag);
         return photoRepo.save(photo);
     }
 

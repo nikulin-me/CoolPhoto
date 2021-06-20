@@ -3,7 +3,7 @@
     <form method="post" enctype="multipart/form-data">
         Photo:
         <label>
-            <input name="file" type="file">
+            <input name="file" type="file"/>
             <#if photoError??>
                 <div style="color: crimson">
                     ${photoError}
@@ -17,7 +17,7 @@
         </label>
         Tags:
         <label>
-            <input name="tag" placeholder="Tags">
+            <input name="tag" placeholder="Tags"/>
         </label>
 
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>

@@ -2,7 +2,7 @@
 <@c.page>
     <h2>Change yourself, ${username}</h2>
      <form method="post">
-         <div >
+         <div>
              <label >Username :</label>
              <div>
                  <label>
@@ -19,7 +19,8 @@
              <label>Password:</label>
              <div>
                  <label>
-                     <input type="password" value="<#if user??>${user.password}</#if>" name="password" class="form-control" placeholder="Password" />
+                     <input type="password" value="<#if user??>${user.password}</#if>" name="password"
+                            class="form-control" placeholder="Password" />
                  </label>
              </div>
          </div>
@@ -28,7 +29,7 @@
      </form>
     <br/>
     <form method="post" action="/user/delete">
-        <input type="submit" value="Delete">
+        <input type="submit" value="Delete"/>
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     </form>
 

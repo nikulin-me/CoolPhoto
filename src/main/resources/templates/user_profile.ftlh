@@ -7,12 +7,12 @@
     <#if username!=userChannel>
         <#if isSubscribe>
             <form method="post" action="/user/unsubscribe?username=${userChannel}">
-                <input type="submit" value="Unfollow">
+                <input type="submit" value="Unfollow"/>
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
             </form>
         <#else>
             <form method="post" action="/user/subscribe?username=${userChannel}">
-                <input type="submit" value="Follow">
+                <input type="submit" value="Follow"/>
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
             </form>
         </#if>

@@ -2,6 +2,7 @@
 <#import "parts/loginpage.ftlh" as l>
 <#import "parts/common.ftlh" as c>
 <@c.page>
+    <a>Hello</a>
     <#if error??>
         ${error}
     </#if>

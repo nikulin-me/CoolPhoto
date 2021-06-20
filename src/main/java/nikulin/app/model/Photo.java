@@ -8,7 +8,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
+/*
 @Data
+*/
 @NoArgsConstructor
 @Table(name = "photo")
 public class Photo {
@@ -27,23 +29,57 @@ public class Photo {
 
     private String tag;
 
-    private String type;
 
-    @Lob
-    private byte[] data;
-
-    public Photo(User author, String message, String filename, String tag, String type, byte[] data) {
+    public Photo(User author, String message, String filename, String tag) {
         this.author = author;
         this.message = message;
         this.filename = filename;
         this.tag = tag;
-        this.type = type;
-        this.data = data;
     }
 
     public Photo(String message, String tag, User user) {
         this.message=message;
         this.tag=tag;
         this.author=user;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }

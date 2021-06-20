@@ -1,5 +1,5 @@
 <#include "security.ftlh">
-<div>
+<div id="photos-list">
     <#list photos as photo>
         <br/>
         <br/>
@@ -18,7 +18,7 @@
         </a>
         <div>
             <#if photo.filename??>
-                <img src="/img/${photo.filename}">
+                <img src="/img/${photo.filename}"/>
             </#if>
         </div>
         <br/>

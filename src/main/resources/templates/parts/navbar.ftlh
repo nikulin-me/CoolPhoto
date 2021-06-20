@@ -45,10 +45,10 @@
             <div class="navbar-taxt mr-5">
                 <form action="/user">
                     <label>
-                        <input name="username" placeholder="Username">
+                        <input name="username" placeholder="Username"/>
                     </label>
                     <label>
-                        <input type="submit" value="Find creator">
+                        <input type="submit" value="Find creator"/>
                     </label>
                 </form>
             </div>

@@ -13,7 +13,7 @@
             <td>${user.username}</td>
             <td>
                 <form method="post" action="/users/delete/${user.id}">
-                    <input type="submit" value="Delete">
+                    <input type="submit" value="Delete"/>
                     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                 </form>
             </td>

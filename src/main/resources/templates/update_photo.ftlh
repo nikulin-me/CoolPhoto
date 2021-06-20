@@ -18,7 +18,7 @@
                 </label>
             </div>
             <label>
-                <input name="file" type="file">
+                <input name="file" type="file"/>
             </label>
 
 
@@ -29,7 +29,7 @@
 
         </form>
         <form method="post" action="/update_photo/${photo.author.id}/delete/?photo=${photo.id}">
-            <input type="submit" value="Delete">
+            <input type="submit" value="Delete"/>
             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         </form>
     </div>
