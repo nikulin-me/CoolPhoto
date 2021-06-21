@@ -1,4 +1,4 @@
-package nikulin.app;
+package nikulin.app.service;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 

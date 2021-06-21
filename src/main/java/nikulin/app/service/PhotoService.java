@@ -5,6 +5,8 @@ import nikulin.app.model.User;
 import nikulin.app.repo.PhotoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -93,5 +95,9 @@ public class PhotoService {
 
     public void deleteById(Long photo) {
         photoRepo.deleteById(photo);
+    }
+
+    public Page<Photo> findAll(Pageable pageable) {
+        return photoRepo.findAll(pageable);
     }
 }

@@ -1,10 +1,9 @@
 package nikulin.app;
 
+import nikulin.app.service.DumbPasswordEncoder;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class DumbPasswordEncoderTest {
 

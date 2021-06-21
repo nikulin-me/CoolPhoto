@@ -64,7 +64,7 @@ public class PhotoController {
 
         model.addAttribute("photos", photos);
 
-        return "main";
+        return "redirect:/";
 
     }
 

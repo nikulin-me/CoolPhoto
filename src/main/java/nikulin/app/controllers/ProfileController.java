@@ -83,6 +83,7 @@ public class ProfileController {
         model.addAttribute("subscribersCount",userFindThis.getSubscribers().size());
         model.addAttribute("subscriptionsCount",userFindThis.getSubscriptions().size());
         model.addAttribute("isSubscribe",userFindThis.getSubscribers().contains(user));
+        model.addAttribute("url","/user");
 
 
         return "user_profile";
