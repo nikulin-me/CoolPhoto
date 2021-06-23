@@ -91,5 +91,22 @@ public class ProfileController {
 
         return "user_profile";
     }
+    @GetMapping("/oldPhotos/{userChannel}")
+    public String getUserPagePhotos(@PathVariable String userChannel,
+                                    @AuthenticationPrincipal User user,
+                                    Model model,
+                                    @PageableDefault(sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable
+    ){
+        User userFindThis = userRepo.findByUsername(userChannel);
+        model.addAttribute("userChannel",userChannel);
+        model.addAttribute("subscribersCount",userFindThis.getSubscribers().size());
+        model.addAttribute("subscriptionsCount",userFindThis.getSubscriptions().size());
+        model.addAttribute("isSubscribe",userFindThis.getSubscribers().contains(user));
+        model.addAttribute("url","/user/oldPhotos/"+userChannel);
+        Page<Photo> photos=photoRepo.findAllByAuthor(userFindThis,pageable);
+        model.addAttribute("photos",photos);
+
+        return "oldPhotos";
+    }
 
 }
