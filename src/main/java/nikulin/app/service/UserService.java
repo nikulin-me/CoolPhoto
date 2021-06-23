@@ -73,7 +73,7 @@ public class UserService implements UserDetailsService {
 
 
     private void sendMessage(User user) {
-        if (!StringUtils.isEmpty(user.getEmail())) {
+        if (!StringUtils.hasLength(user.getEmail())) {
             String message = String.format(
                     "Welcome to CoolPhoto, %s! \n" +
                             "Please, visit next link: http://localhost:8080/activate/%s",

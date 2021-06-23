@@ -7,6 +7,10 @@ import nikulin.app.repo.UserRepo;
 import nikulin.app.service.PhotoService;
 import nikulin.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,16 +74,15 @@ public class ProfileController {
         Set<Photo> photoOfUser = photoRepo.findByAuthor(userFindThis);
         if (userFindThis==null){
             model.addAttribute("error","Такого юзера нет");
-            return "redirect:/";
+            return "main";
         }
         if (photoOfUser.isEmpty()){
             model.addAttribute("error","Тут пока ничего нет");
         }
         else{
-            model.addAttribute("photos",photoRepo);
+            model.addAttribute("photos",photoOfUser);
         }
         model.addAttribute("userChannel",username);
-        model.addAttribute("photos",photoOfUser);
         model.addAttribute("subscribersCount",userFindThis.getSubscribers().size());
         model.addAttribute("subscriptionsCount",userFindThis.getSubscriptions().size());
         model.addAttribute("isSubscribe",userFindThis.getSubscribers().contains(user));

@@ -1,12 +1,10 @@
 <#include "security.ftlh">
-<#import  "pager.ftlh" as p>
-<@p.pager url photos/>
 <div class="card-columns"  id="photos-list">
-    <#list photos.content as photo>
+    <#list photos as photo>
         <div class="card my-3" data-id="${photo.id}">
             <style>
                 .line{
-                    border: 1px #4b4bcd solid
+                    border: 1px solid
                 }
             </style>
             <a href="/user?username=${photo.author.username}">
@@ -17,7 +15,6 @@
                     <a href="/update_photo/${photo.author.id}?photo=${photo.id}">Edit</a>
                 </#if>
             </a>
-            <div class="line"></div>
             <div>
                 <#if photo.filename??>
                     <img src="/img/${photo.filename}" class="card-img-top"/>
@@ -26,9 +23,8 @@
             <br/>
             <span>${photo.message}</span>
             <br/>
-            <i>Tags: #${photo.tag}</i>
+            <i>#${photo.tag}</i>
             <div class="line"></div>
         </div>
     </#list>
 </div>
-<@p.pager url photos/>

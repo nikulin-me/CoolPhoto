@@ -47,10 +47,12 @@
         </div>
     </div>
     <div>
+        <br/>
         <#if error??>
             ${error}
         <#else>
-            <#include "parts/photosList.ftlh">
+            <br/>
+            <#include "parts/staticUserPhotos.ftlh">
         </#if>
 
     </div>
