@@ -3,10 +3,14 @@ package nikulin.app.controllers;
 
 import nikulin.app.model.Photo;
 import nikulin.app.model.User;
+import nikulin.app.model.dto.PhotoDto;
 import nikulin.app.repo.PhotoRepo;
 import nikulin.app.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,7 +50,8 @@ public class PhotoController {
             @Valid Photo photo1,
             BindingResult bindingResult,
             Model model,
-            @RequestParam("file") MultipartFile file
+            @RequestParam("file") MultipartFile file,
+            @PageableDefault(sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable
     ) throws IOException {
         photo1.setAuthor(user);
 
@@ -60,7 +65,7 @@ public class PhotoController {
 
         photoRepo.save(photo1);
 
-        Iterable<Photo> photos = photoRepo.findAll();
+        Iterable<Photo> photos = photoRepo.findAll(pageable);
 
         model.addAttribute("photos", photos);
 

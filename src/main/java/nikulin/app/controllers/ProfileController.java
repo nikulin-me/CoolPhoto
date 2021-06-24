@@ -2,6 +2,7 @@ package nikulin.app.controllers;
 
 import nikulin.app.model.Photo;
 import nikulin.app.model.User;
+import nikulin.app.model.dto.PhotoDto;
 import nikulin.app.repo.PhotoRepo;
 import nikulin.app.repo.UserRepo;
 import nikulin.app.service.PhotoService;

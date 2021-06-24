@@ -1,7 +1,7 @@
 package nikulin.app.controllers;
 
 
-import nikulin.app.model.CaptchaResponseDto;
+import nikulin.app.model.dto.CaptchaResponseDto;
 import nikulin.app.model.User;
 import nikulin.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,6 +2,7 @@ package nikulin.app.service;
 
 import nikulin.app.model.Photo;
 import nikulin.app.model.User;
+import nikulin.app.model.dto.PhotoDto;
 import nikulin.app.repo.PhotoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
@@ -28,15 +30,14 @@ public class PhotoService {
     @Autowired
     private PhotoRepo photoRepo;
 
-    public Photo uploadFile(MultipartFile file, User user, String message, String tag) throws IOException {
+    @Autowired
+    private EntityManager entityManager; //удобно делаем запросы
+
+    /*public Photo uploadFile(MultipartFile file, User user, String message, String tag) throws IOException {
         String filename = file.getOriginalFilename();
         Photo photo = new Photo(user, message, filename, tag);
         return photoRepo.save(photo);
-    }
-
-    public List<Photo> getFiles() {
-        return photoRepo.findAll();
-    }
+    }*/
 
     public Optional<Photo> getFile(Long id) {
         return Optional.empty();
@@ -83,7 +84,7 @@ public class PhotoService {
         photoRepo.deleteById(photo);
     }
 
-    public Page<Photo> findAll(Pageable pageable) {
+    public Page<Photo> photoList(Pageable pageable) {
         return photoRepo.findAll(pageable);
     }
 }

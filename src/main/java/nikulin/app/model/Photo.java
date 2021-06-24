@@ -2,10 +2,13 @@ package nikulin.app.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import nikulin.app.model.util.PhotoUtil;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 /*
@@ -29,6 +32,13 @@ public class Photo {
 
     private String tag;
 
+    @ManyToMany
+    @JoinTable(
+            name = "photo_likes",
+            joinColumns = {@JoinColumn(name ="photo_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")}
+    )
+    private Set<User> likes=new HashSet<>();
 
     public Photo(User author, String message, String filename, String tag) {
         this.author = author;
@@ -41,6 +51,10 @@ public class Photo {
         this.message=message;
         this.tag=tag;
         this.author=user;
+    }
+
+    public String getAuthorName(){
+        return PhotoUtil.getAuthorName(author);
     }
 
     public Long getId() {
@@ -81,5 +95,13 @@ public class Photo {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public Set<User> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Set<User> likes) {
+        this.likes = likes;
     }
 }
