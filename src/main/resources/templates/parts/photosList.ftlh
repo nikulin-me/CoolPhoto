@@ -9,7 +9,6 @@
                     border: 1px #4b4bcd solid
                 }
             </style>
-
             <div class="card-footer text-muted container">
                 <div class="row">
                     <a class=" col align-self-center " href="/user?username=${photo.author.username}">
@@ -20,6 +19,7 @@
                            href="/update_photo/${photo.author.id}?photo=${photo.id}">Edit</a>
                     </#if>
                 </div>
+
             </div>
             <div class="line"></div>
             <div>
@@ -29,8 +29,8 @@
             </div>
             <div class="card-footer text-muted container">
                 <div class="row">
-                    <a href="#" class="col align-self-center">
-                        <#if photo.isLiked>
+                    <a class="col align-self-center" href="/photo/${photo.id}/like">
+                        <#if photo.meLiked>
                             <i class="fas fa-heart"></i>
                         <#else>
                             <i class="far fa-heart"></i>
@@ -38,10 +38,17 @@
                         ${photo.likes}
                     </a>
                 </div>
+                <div class="row">
+
+                    <a class="col align-self-center">
+                        <span>${photo.message}</span>
+                    </a>
+                </div>
+                <div>
+                    <i>Tags: #${photo.tag}</i>
+                </div>
+
             </div>
-            <span>${photo.message}</span>
-            <br/>
-            <i>Tags: #${photo.tag}</i>
             <div class="line"></div>
         </div>
     </#list>

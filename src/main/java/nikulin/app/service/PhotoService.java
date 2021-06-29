@@ -84,7 +84,7 @@ public class PhotoService {
         photoRepo.deleteById(photo);
     }
 
-    public Page<Photo> photoList(Pageable pageable) {
-        return photoRepo.findAll(pageable);
+    public Page<PhotoDto> photoList(Pageable pageable,User user) {
+        return photoRepo.findAll(pageable,user);
     }
 }

@@ -33,7 +33,7 @@ public class MainController {
             @AuthenticationPrincipal User user
 
     ){
-        Page<Photo>  photos=photoService.photoList(pageable);
+        Page<PhotoDto>photos=photoService.photoList(pageable,user);
         model.addAttribute("url","/");
         model.addAttribute("photos",photos);
         return "main";

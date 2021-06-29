@@ -104,7 +104,7 @@ public class ProfileController {
         model.addAttribute("subscriptionsCount",userFindThis.getSubscriptions().size());
         model.addAttribute("isSubscribe",userFindThis.getSubscribers().contains(user));
         model.addAttribute("url","/user/oldPhotos/"+userChannel);
-        Page<Photo> photos=photoRepo.findAllByAuthor(userFindThis,pageable);
+        Page<PhotoDto> photos=photoRepo.findAllByAuthor(userFindThis,user,pageable);
         model.addAttribute("photos",photos);
 
         return "oldPhotos";

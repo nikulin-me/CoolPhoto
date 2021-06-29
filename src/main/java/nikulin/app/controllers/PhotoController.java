@@ -8,6 +8,7 @@ import nikulin.app.repo.PhotoRepo;
 import nikulin.app.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -65,7 +66,7 @@ public class PhotoController {
 
         photoRepo.save(photo1);
 
-        Iterable<Photo> photos = photoRepo.findAll(pageable);
+        Page<PhotoDto> photos = photoService.photoList(pageable,user);
 
         model.addAttribute("photos", photos);
 
