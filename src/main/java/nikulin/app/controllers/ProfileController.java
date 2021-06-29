@@ -109,5 +109,14 @@ public class ProfileController {
 
         return "oldPhotos";
     }
+    @GetMapping("/users")
+    public String findUser(
+            @RequestParam("reqName") String reqName,
+            Model model
+    ){
+        Set<User> users = userRepo.findByUsernameStartsWithIgnoreCase(reqName);
+        model.addAttribute("users",users);
+        return "usersList";
+    }
 
 }

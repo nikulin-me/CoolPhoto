@@ -43,9 +43,9 @@
         </ul>
         <#if !isRegistrationForm>
             <div class="navbar-taxt mr-5">
-                <form action="/user">
+                <form action="/user/users">
                     <label>
-                        <input name="username" placeholder="Username"/>
+                        <input name="reqName" placeholder="Username"/>
                     </label>
                     <label>
                         <input type="submit" value="Find creator"/>
