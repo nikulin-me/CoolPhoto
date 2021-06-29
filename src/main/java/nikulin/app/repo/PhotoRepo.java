@@ -37,4 +37,13 @@ public interface PhotoRepo extends CrudRepository<Photo, Long> {
     Page<PhotoDto> findAllByAuthor(@Param("author") User author, @Param("user") User user, Pageable pageable);
 
 
+    @Query("select new nikulin.app.model.dto.PhotoDto(" +
+            "   p, " +
+            "   count(pl), " +
+            "   sum(case when pl=:user then 1 else 0 end) > 0 " +
+            ") " +
+            "from Photo p left join p.likes pl " +
+            "where p.tag=:tag " +
+            "group by p")
+    Page<PhotoDto> findByTag(String tag, User user, Pageable pageable);
 }

@@ -87,4 +87,8 @@ public class PhotoService {
     public Page<PhotoDto> photoList(Pageable pageable,User user) {
         return photoRepo.findAll(pageable,user);
     }
+
+    public Page<PhotoDto> photosByTag(String tag, User user, Pageable pageable) {
+        return photoRepo.findByTag(tag,user,pageable);
+    }
 }

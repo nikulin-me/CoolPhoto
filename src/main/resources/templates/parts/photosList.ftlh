@@ -45,7 +45,11 @@
                     </a>
                 </div>
                 <div>
-                    <i>Tags: #${photo.tag}</i>
+                    <i>Tags: #
+                        <a href="/tags/${photo.tag}">
+                            ${photo.tag}
+                        </a>
+                    </i>
                 </div>
 
             </div>

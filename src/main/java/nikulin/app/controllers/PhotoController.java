@@ -55,7 +55,7 @@ public class PhotoController {
             @PageableDefault(sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable
     ) throws IOException {
         photo1.setAuthor(user);
-
+        
         if (bindingResult.hasErrors()) {
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
             model.addAttribute("photoError", errorsMap);
@@ -108,4 +108,19 @@ public class PhotoController {
         return "redirect:/";
     }
 
+    @GetMapping("/tags/{tag}")
+    public String photoListByTag(
+            @PathVariable String tag,
+            Model model,
+            @AuthenticationPrincipal User user,
+            @PageableDefault(sort = {"id" },direction = Sort.Direction.DESC) Pageable pageable
+    ){
+        Page<PhotoDto> photosByTag = photoService.photosByTag(tag, user, pageable);
+        model.addAttribute("photos",photosByTag);
+        model.addAttribute("url","/tags/"+tag);
+        model.addAttribute("tag",tag);
+
+        return "tags";
+
+    }
 }
