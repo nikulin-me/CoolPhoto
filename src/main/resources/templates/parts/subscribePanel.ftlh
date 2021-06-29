@@ -1,6 +1,12 @@
 <div>
-    <#list users as user>
-        <a href="/user?username=${user.username}">${user.username}</a>
-        <br/>
-    </#list>
+
+    <ul class="list-group">
+        <#list users as user>
+            <li class="list-group-item">
+                <a href="/user?username=${user.username}">${user.username}</a>
+
+            </li>
+            <br/>
+        </#list>
+    </ul>
 </div>
