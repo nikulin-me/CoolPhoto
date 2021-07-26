@@ -9,9 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "usr")
@@ -135,6 +133,9 @@ public class  User implements UserDetails {
     }
 
     public String getUsername() {
+        if(username==null){
+            return "null";
+        }
         return username;
     }
 

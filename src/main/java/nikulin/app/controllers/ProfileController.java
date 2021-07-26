@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
 import java.util.Set;
 
 @Controller
@@ -34,6 +35,9 @@ public class ProfileController {
 
     @Autowired
     private PhotoService photoService;
+
+    @Autowired
+    private EntityManager entityManager;
 
     @GetMapping("/profile")
     public String getProfile( Model model,@AuthenticationPrincipal User user ){
@@ -115,6 +119,8 @@ public class ProfileController {
             Model model
     ){
         Set<User> users = userRepo.findByUsernameStartsWithIgnoreCase(reqName);
+        if (users.size()==0)
+            model.addAttribute("errorPage","Users weren`t found");
         model.addAttribute("users",users);
         return "usersList";
     }
